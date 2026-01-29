@@ -5,6 +5,8 @@ class AuthController < ActionController::API
       password: params[:password]
     )
 
-    render json: { token: "dummy-token" }, status: :created
+    token = JsonWebToken.encode(user_id: user.id)
+
+    render json: { token: token }, status: :created
   end
 end
